@@ -41,29 +41,29 @@
 **Objective:** Establish a repeatable local inference baseline before UI development.
 
 ### P0-001 — Development environment
-- [ ] P0-001.01 Record macOS version, hardware, available disk and available unified memory.
-- [ ] P0-001.02 Verify Xcode, Command Line Tools and Swift toolchain versions.
-- [ ] P0-001.03 Confirm Apple Silicon and Metal support.
-- [ ] P0-001.04 Establish repository naming, directory structure and `.gitignore`.
-- [ ] P0-001.05 Create `README.md`, `AGENTS.md`, this checklist and a test-evidence location.
-- [ ] P0-001.06 Record offline and no-subscription requirements in project documentation.
+- [x] P0-001.01 Record macOS version, hardware, available disk and available unified memory.
+- [x] P0-001.02 Verify Xcode, Command Line Tools and Swift toolchain versions.
+- [x] P0-001.03 Confirm Apple Silicon and Metal support.
+- [x] P0-001.04 Establish repository naming, directory structure and `.gitignore`.
+- [x] P0-001.05 Create `README.md`, `AGENTS.md`, this checklist and a test-evidence location.
+- [x] P0-001.06 Record offline and no-subscription requirements in project documentation.
 
 ### P0-002 — Ollama runtime
-- [ ] P0-002.01 Install or verify Ollama.
-- [ ] P0-002.02 Start the inference service and verify its health.
-- [ ] P0-002.03 Confirm API binds to loopback, not an externally reachable interface.
-- [ ] P0-002.04 Document model storage path and runtime dependencies.
-- [ ] P0-002.05 Validate stop, restart, failure and unavailable-service behaviour.
-- [ ] P0-002.06 Document expected version compatibility and runtime update procedure.
+- [x] P0-002.01 Install or verify Ollama.
+- [x] P0-002.02 Start the inference service and verify its health.
+- [x] P0-002.03 Confirm API binds to loopback, not an externally reachable interface.
+- [x] P0-002.04 Document model storage path and runtime dependencies.
+- [x] P0-002.05 Validate stop, restart, failure and unavailable-service behaviour.
+- [x] P0-002.06 Document expected version compatibility and runtime update procedure.
 
 ### P0-003 — DeepSeek model
-- [ ] P0-003.01 Download `deepseek-r1:14b` with `ollama pull deepseek-r1:14b`.
-- [ ] P0-003.02 Verify model identity, quantisation, size and licence information.
-- [ ] P0-003.03 Run a baseline reasoning prompt and record output quality.
-- [ ] P0-003.04 Evaluate C, C++, Python, Swift and CMake prompts.
-- [ ] P0-003.05 Test source analysis, bug diagnosis and unit-test generation.
-- [ ] P0-003.06 Test long responses, cancellation and reloading.
-- [ ] P0-003.07 Define a reproducible set of coding evaluation prompts.
+- [x] P0-003.01 Download `deepseek-r1:14b` with `ollama pull deepseek-r1:14b`.
+- [x] P0-003.02 Verify model identity, quantisation, size and licence information.
+- [x] P0-003.03 Run a baseline reasoning prompt and record output quality.
+- [x] P0-003.04 Evaluate C, C++, Python, Swift and CMake prompts.
+- [x] P0-003.05 Test source analysis, bug diagnosis and unit-test generation.
+- [x] P0-003.06 Test long responses, cancellation and reloading.
+- [x] P0-003.07 Define a reproducible set of coding evaluation prompts.
 
 ### P0-004 — Performance and feasibility
 - [ ] P0-004.01 Record idle memory and memory during generation.

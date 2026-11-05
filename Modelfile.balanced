@@ -1,0 +1,10 @@
+FROM deepseek-r1:14b
+
+# Limit context memory consumption.
+PARAMETER num_ctx 4096
+
+# Bound generated reasoning and response tokens.
+PARAMETER num_predict 1024
+
+# Conservative sampling for technical tasks.
+PARAMETER temperature 0.3
