@@ -79,6 +79,28 @@
 
 ---
 
+## P0-005 — Resource-aware inference control (thermal and power)
+
+**Status:** SOURCE ADDED — NOT BUILT, TESTED, INTEGRATED OR VALIDATED
+**Scope:** Cat AI's own Ollama requests; not a hardware-level GPU utilisation or wattage cap.
+**Approved on:** 2026-11-05 (file additions only; compilation and tests require separate approval).
+
+- [x] P0-005.01 Add preliminary public macOS thermal-state sampler (`MacThermalSampler.swift`).
+- [x] P0-005.02 Add initial actor-isolated admission and cancellation policy (`ResourcePolicy.swift`).
+- [x] P0-005.03 Add experimental continuous-inference deadlines (20/40/60 seconds).
+- [ ] P0-005.04 Finalise cooldown/recovery safeguards, including cooldown following timeout and verified backend cancellation.
+- [ ] P0-005.05 Wire policy cancellation to the real Ollama streaming adapter and verify GPU work stops.
+- [x] P0-005.06 Add initial Swift Testing source (`ResourceControllerTests.swift`); **not executed**.
+- [ ] P0-005.07 Compile and run tests only with separate approval; resolve any failures and add missing edge/race tests.
+- [ ] P0-005.08 Benchmark GPU power (where measurable), thermal state, memory, throughput and responsiveness.
+- [ ] P0-005.09 Add user-facing SwiftUI status/controls after the app target exists.
+- [x] P0-005.10 Document initial architecture and outstanding safety limitations (`docs/thermal-management.md`).
+- [ ] P0-005.11 Review validation evidence and obtain approval for ticket closure.
+
+**Known blockers:** No verified native Xcode target; no integrated Ollama adapter; no unprivileged live GPU-wattage telemetry; cancelled logical slot may be reused before backend GPU work ends. See `docs/thermal-management.md`.
+
+---
+
 ## P1 — Native macOS application foundation
 
 **Objective:** A responsive SwiftUI application connected to local Ollama.
