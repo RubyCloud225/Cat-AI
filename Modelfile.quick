@@ -1,0 +1,11 @@
+FROM deepseek-r1:14b
+
+# Keep the same bounded context as the other Cat AI profiles.
+PARAMETER num_ctx 4096
+
+# Short responses for focused code edits and quick questions.
+# This budget includes DeepSeek-R1 reasoning tokens.
+PARAMETER num_predict 768
+
+# Conservative sampling for technical tasks.
+PARAMETER temperature 0.3
