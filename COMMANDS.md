@@ -115,6 +115,69 @@ P0-003 R04: bounded Swift implementation/instruction-following	Not started
 
 
 Scores are human reviews of model output, not compilation results or standardised benchmark scores.
+
+10. Cat AI Balanced — constrained local inference (P0-004)
+The following is the approved initial resource-limited profile for the M4 Pro with 24 GB unified memory. These limits reduce context and response length, but DO NOT impose a hard GPU-utilisation or temperature cap.
+
+Modelfile.balanced (already committed in repository root):
+```dockerfile
+FROM deepseek-r1:14b
+
+# Limit context memory consumption.
+PARAMETER num_ctx 4096
+
+# Bound generated reasoning and response tokens.
+PARAMETER num_predict 1024
+
+# Conservative sampling for technical tasks.
+PARAMETER temperature 0.3
+```
+
+Create the local profile (writes Ollama model metadata; explicit execution approval required):
+```bash
+ollama create cat-ai-balanced -f Modelfile.balanced
+```
+Run the bounded profile (starts inference; approval required):
+```bash
+ollama run cat-ai-balanced
+```
+Inspect the generated profile (read-only):
+```bash
+ollama show --modelfile cat-ai-balanced
+ollama list
+```
+Stop the loaded model when no longer needed (changes runtime state; approval required):
+```bash
+ollama stop cat-ai-balanced
+```
+
+Ollama server resource limits (environment settings, NOT Modelfile directives):
+```bash
+OLLAMA_NUM_PARALLEL=1 \\
+OLLAMA_MAX_LOADED_MODELS=1 \\
+OLLAMA_KEEP_ALIVE=1m \\
+OLLAMA_CONTEXT_LENGTH=4096 \\
+ollama serve
+```
+Only run this server command when the existing Ollama service has been cleanly stopped. If Ollama is running as the macOS application/launch service, configure that service's launch environment instead; exporting variables in an unrelated terminal will not reconfigure an already-running server. Confirm the actual startup method before changing service configuration.
+
+Settings explained:
+- `num_ctx 4096`: target 4,096-token context for this model profile.
+- `num_predict 1024`: maximum generated tokens, including reasoning and final response; long reasoning may exhaust the budget before the answer completes.
+- `temperature 0.3`: more conservative sampling; does not directly cap hardware load.
+- `OLLAMA_NUM_PARALLEL=1`: one parallel request per model.
+- `OLLAMA_MAX_LOADED_MODELS=1`: at most one loaded model at a time.
+- `OLLAMA_KEEP_ALIVE=1m`: default idle residency; request-level keep_alive may override it.
+- `OLLAMA_CONTEXT_LENGTH=4096`: server default context length; per-model/per-request settings may override it.
+
+Validation (inspect before any further benchmark; tests require approval):
+```bash
+ollama ps
+ollama show --modelfile cat-ai-balanced
+lsof -nP -iTCP:11434 -sTCP:LISTEN
+```
+Record throughput, memory pressure, GPU utilisation during generation and the return to idle under P0-004. The previously observed approximately 100% GPU utilisation during generation and 99% idle afterwards are preliminary observations, not a thermal-safety certification.
+
 9. Prohibited shortcuts
 Do not use the following as routine cleanup or development shortcuts:
 sudo rm -rf <directory>
