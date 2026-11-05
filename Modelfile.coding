@@ -1,0 +1,10 @@
+FROM deepseek-r1:14b
+
+# Restrict context memory.
+PARAMETER num_ctx 4096
+
+# Allow longer reasoning and code generation.
+PARAMETER num_predict 2048
+
+# Conservative coding temperature.
+PARAMETER temperature 0.3
